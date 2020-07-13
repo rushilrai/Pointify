@@ -13,3 +13,8 @@ class Activity {
 }
 
 List<Activity> activityList = [];
+
+void addActivity(Activity activity) {
+  activityList.add(activity);
+  print(activityList.length);
+}
