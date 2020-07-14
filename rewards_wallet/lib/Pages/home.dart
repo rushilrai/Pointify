@@ -8,20 +8,164 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool press = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          SizedBox(
-            height: 30,
-          ),
-          CustomPaint(
-            child: Container(
-              height: displayHeight(context) * 0.2,
+          Spacer(),
+          AspectRatio(
+            aspectRatio: 375 / 128,
+            child: AnimatedContainer(
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  spreadRadius: -displayWidth(context) * 0.12,
+                  offset: Offset(0, displayHeight(context) * 0.05),
+                  blurRadius: 8,
+                ),
+              ]),
+              //height: displayHeight(context) * 0.2,
               width: displayWidth(context),
+              duration: Duration(
+                milliseconds: 300,
+              ),
+              child: CustomPaint(
+                painter: PointsPainter(),
+              ),
             ),
-            painter: PointsPainter(),
+          ),
+          Spacer(),
+          Container(
+            width: displayWidth(context) * 0.8,
+            child: AspectRatio(
+              aspectRatio: 375 / 65,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: displayWidth(context) * 0.35,
+                    height: displayWidth(context) * 0.15,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(0, 3),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: RaisedButton(
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset(
+                                'assets/images/dumbbell.png',
+                                width: displayWidth(context) * 0.06,
+                              ),
+                              Text(
+                                'Work',
+                                style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: displayWidth(context) * 0.045,
+                                  color: redColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onPressed: () {
+                          print('hello');
+                        },
+                        color: bgColor,
+                        splashColor: redColor,
+                        disabledColor: bgColor,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: displayWidth(context) * 0.35,
+                    height: displayWidth(context) * 0.15,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(0, 3),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: RaisedButton(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              'assets/images/trophy.png',
+                              width: displayWidth(context) * 0.06,
+                            ),
+                            Text(
+                              'Reward',
+                              style: TextStyle(
+                                fontFamily: 'OpenSans',
+                                fontWeight: FontWeight.w400,
+                                fontSize: displayWidth(context) * 0.045,
+                                color: tealColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        onPressed: () {
+                          print('hello');
+                        },
+                        color: bgColor,
+                        splashColor: tealColor,
+                        disabledColor: bgColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Spacer(),
+          Container(
+            width: displayWidth(context) * 0.8,
+            child: Row(
+              children: [
+                Icon(
+                  Icons.history,
+                  size: displayWidth(context) * 0.05,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  'History',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.w600,
+                    fontSize: displayWidth(context) * 0.04,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: displayWidth(context) * 0.8,
+            child: AspectRatio(aspectRatio: 375 / 440),
           ),
         ],
       ),

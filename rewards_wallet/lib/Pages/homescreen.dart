@@ -75,7 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ? mainColor
                                     : Colors.black,
                               ),
-                              Text('Home'),
+                              Text(
+                                'Home',
+                                style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w400,
+                                  color: (selectedScreen == 0)
+                                      ? mainColor
+                                      : Colors.black,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -95,7 +104,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ? mainColor
                                     : Colors.black,
                               ),
-                              Text('Settings'),
+                              Text(
+                                'Settings',
+                                style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w400,
+                                  color: (selectedScreen == 1)
+                                      ? mainColor
+                                      : Colors.black,
+                                ),
+                              ),
                             ],
                           ),
                         ),
