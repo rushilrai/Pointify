@@ -14,7 +14,9 @@ class _HomePageState extends State<HomePage> {
     return Container(
       child: Column(
         children: [
-          Spacer(),
+          Spacer(
+            flex: 2,
+          ),
           AspectRatio(
             aspectRatio: 375 / 128,
             child: AnimatedContainer(
@@ -36,7 +38,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Spacer(),
+          Spacer(
+            flex: 2,
+          ),
           Container(
             width: displayWidth(context) * 0.8,
             child: AspectRatio(
@@ -136,7 +140,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Spacer(),
+          Spacer(
+            flex: 2,
+          ),
           Container(
             width: displayWidth(context) * 0.8,
             child: Row(
@@ -165,7 +171,90 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             width: displayWidth(context) * 0.8,
-            child: AspectRatio(aspectRatio: 375 / 440),
+            child: AspectRatio(
+              aspectRatio: 375 / 440,
+              child: ListView(
+                padding: EdgeInsets.all(2),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 7.0,
+                      bottom: 7.0,
+                    ),
+                    child: AnimatedContainer(
+                      duration: Duration(
+                        milliseconds: 200,
+                      ),
+                      height: displayWidth(context) * 0.13,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(0, 3),
+                            spreadRadius: 0,
+                            blurRadius: 5,
+                          ),
+                        ],
+                        color: bgColor,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Reading',
+                                  style: TextStyle(
+                                    fontFamily: 'OpenSans',
+                                    color: redColor,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: displayWidth(context) * 0.045,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      '+10',
+                                      style: TextStyle(
+                                        fontFamily: 'OpenSans',
+                                        color: redColor,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: displayWidth(context) * 0.045,
+                                      ),
+                                    ),
+                                    Text(
+                                      ' P',
+                                      style: TextStyle(
+                                        fontFamily: 'OpenSans',
+                                        color: redColor,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: displayWidth(context) * 0.045,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

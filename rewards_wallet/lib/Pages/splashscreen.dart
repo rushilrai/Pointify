@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rewards_wallet/Pages/homescreen.dart';
 import 'package:rewards_wallet/colors.dart';
@@ -26,8 +27,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: mainColor,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        systemNavigationBarColor: mainColor,
+      ),
+      child: Container(
+        color: mainColor,
+      ),
     );
   }
 }
