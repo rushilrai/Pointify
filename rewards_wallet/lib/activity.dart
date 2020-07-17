@@ -13,8 +13,17 @@ class Activity {
 }
 
 List<Activity> activityList = [];
+int points = 0;
 
 void addActivity(Activity activity) {
   activityList.add(activity);
   print(activityList.length);
+}
+
+void totalPoints() {
+  points = 0;
+  for (var i = 0; i < activityList.length; i++) {
+    points = points + activityList[i].points;
+  }
+  print(points);
 }

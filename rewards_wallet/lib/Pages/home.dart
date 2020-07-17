@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:rewards_wallet/Pages/homescreen.dart';
 import 'package:rewards_wallet/Pages/settings.dart';
+import 'package:rewards_wallet/activity.dart';
 import 'package:rewards_wallet/colors.dart';
 import 'package:rewards_wallet/sizes.dart';
 
@@ -72,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '140 P',
+                                points.toString() + ' P',
                                 style: TextStyle(
                                   fontFamily: 'OpenSans',
                                   fontWeight: FontWeight.w600,
@@ -135,6 +137,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   onPressed: () {
                                     showMaterialModalBottomSheet(
+                                      enableDrag: false,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10)),
@@ -143,7 +146,236 @@ class _HomePageState extends State<HomePage> {
                                           Container(
                                         width: displayWidth(context),
                                         height: displayWidth(context) * 1.2,
-                                        decoration: BoxDecoration(),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Work',
+                                                    style: TextStyle(
+                                                      fontFamily: 'OpenSans',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: displayWidth(
+                                                              context) *
+                                                          0.05,
+                                                      color: redColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              AspectRatio(
+                                                aspectRatio: 375 / 360,
+                                                child: ListView(
+                                                  shrinkWrap: true,
+                                                  padding: EdgeInsets.all(2),
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        top: 7.0,
+                                                        bottom: 7.0,
+                                                      ),
+                                                      child: Row(
+                                                        children: [
+                                                          AnimatedContainer(
+                                                            duration: Duration(
+                                                              milliseconds: 200,
+                                                            ),
+                                                            height: displayWidth(
+                                                                    context) *
+                                                                0.13,
+                                                            width: displayWidth(
+                                                                    context) *
+                                                                0.7,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black12,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 3),
+                                                                  spreadRadius:
+                                                                      0,
+                                                                  blurRadius: 5,
+                                                                ),
+                                                              ],
+                                                              color: bgColor,
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                left: 10.0,
+                                                                right: 10.0,
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Reading',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontFamily:
+                                                                              'OpenSans',
+                                                                          color:
+                                                                              redColor,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                          fontSize:
+                                                                              displayWidth(context) * 0.045,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          Text(
+                                                                            '-10',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontFamily: 'OpenSans',
+                                                                              color: redColor,
+                                                                              fontWeight: FontWeight.w400,
+                                                                              fontSize: displayWidth(context) * 0.045,
+                                                                            ),
+                                                                          ),
+                                                                          Text(
+                                                                            ' P',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontFamily: 'OpenSans',
+                                                                              color: redColor,
+                                                                              fontWeight: FontWeight.w400,
+                                                                              fontSize: displayWidth(context) * 0.045,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Spacer(),
+                                                          Icon(
+                                                            Icons.alarm,
+                                                            color: Colors.black,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 05,
+                                                          ),
+                                                          Text(
+                                                            '1 Hr',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  'OpenSans',
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize:
+                                                                  displayWidth(
+                                                                          context) *
+                                                                      0.045,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    width:
+                                                        displayWidth(context) *
+                                                            0.4,
+                                                    height:
+                                                        displayWidth(context) *
+                                                            0.1,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      child: RaisedButton(
+                                                        child: Center(
+                                                          child: Text(
+                                                            'Add New',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  'OpenSans',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: bgColor,
+                                                              fontSize:
+                                                                  displayWidth(
+                                                                          context) *
+                                                                      0.04,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        onPressed: () {
+                                                          navigator
+                                                              .pop(context);
+                                                          showDialog(
+                                                            barrierColor:
+                                                                Colors.black54,
+                                                            useSafeArea: true,
+                                                            context: context,
+                                                            builder:
+                                                                (context) =>
+                                                                    Center(
+                                                              child:
+                                                                  AddActivityDialog(),
+                                                            ),
+                                                          );
+                                                        },
+                                                        color: mainColor,
+                                                        splashColor: mainColor,
+                                                        disabledColor: bgColor,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     );
                                   },
@@ -191,15 +423,245 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   onPressed: () {
                                     showMaterialModalBottomSheet(
+                                      enableDrag: false,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                       context: context,
                                       builder: (context, scrollController) =>
                                           Container(
                                         width: displayWidth(context),
                                         height: displayWidth(context) * 1.2,
-                                        decoration: BoxDecoration(),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    'Reward',
+                                                    style: TextStyle(
+                                                      fontFamily: 'OpenSans',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: displayWidth(
+                                                              context) *
+                                                          0.05,
+                                                      color: tealColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              AspectRatio(
+                                                aspectRatio: 375 / 360,
+                                                child: ListView(
+                                                  shrinkWrap: true,
+                                                  padding: EdgeInsets.all(2),
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        top: 7.0,
+                                                        bottom: 7.0,
+                                                      ),
+                                                      child: Row(
+                                                        children: [
+                                                          AnimatedContainer(
+                                                            duration: Duration(
+                                                              milliseconds: 200,
+                                                            ),
+                                                            height: displayWidth(
+                                                                    context) *
+                                                                0.13,
+                                                            width: displayWidth(
+                                                                    context) *
+                                                                0.7,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black12,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 3),
+                                                                  spreadRadius:
+                                                                      0,
+                                                                  blurRadius: 5,
+                                                                ),
+                                                              ],
+                                                              color: bgColor,
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                left: 10.0,
+                                                                right: 10.0,
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Gaming',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontFamily:
+                                                                              'OpenSans',
+                                                                          color:
+                                                                              tealColor,
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                          fontSize:
+                                                                              displayWidth(context) * 0.045,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          Text(
+                                                                            '+10',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontFamily: 'OpenSans',
+                                                                              color: tealColor,
+                                                                              fontWeight: FontWeight.w400,
+                                                                              fontSize: displayWidth(context) * 0.045,
+                                                                            ),
+                                                                          ),
+                                                                          Text(
+                                                                            ' P',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              fontFamily: 'OpenSans',
+                                                                              color: tealColor,
+                                                                              fontWeight: FontWeight.w400,
+                                                                              fontSize: displayWidth(context) * 0.045,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Spacer(),
+                                                          Icon(
+                                                            Icons.alarm,
+                                                            color: Colors.black,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 05,
+                                                          ),
+                                                          Text(
+                                                            '1 Hr',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  'OpenSans',
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize:
+                                                                  displayWidth(
+                                                                          context) *
+                                                                      0.045,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    width:
+                                                        displayWidth(context) *
+                                                            0.4,
+                                                    height:
+                                                        displayWidth(context) *
+                                                            0.1,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      child: RaisedButton(
+                                                        child: Center(
+                                                          child: Text(
+                                                            'Add New',
+                                                            style: TextStyle(
+                                                              fontFamily:
+                                                                  'OpenSans',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: bgColor,
+                                                              fontSize:
+                                                                  displayWidth(
+                                                                          context) *
+                                                                      0.04,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        onPressed: () {
+                                                          navigator
+                                                              .pop(context);
+                                                          showDialog(
+                                                            barrierColor:
+                                                                Colors.black54,
+                                                            useSafeArea: true,
+                                                            context: context,
+                                                            builder:
+                                                                (context) =>
+                                                                    Center(
+                                                              child:
+                                                                  AddActivityDialog(),
+                                                            ),
+                                                          );
+                                                        },
+                                                        color: mainColor,
+                                                        splashColor: mainColor,
+                                                        disabledColor: bgColor,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     );
                                   },

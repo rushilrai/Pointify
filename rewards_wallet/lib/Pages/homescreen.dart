@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:rewards_wallet/Pages/home.dart';
+import 'package:rewards_wallet/activity.dart';
 import 'package:rewards_wallet/colors.dart';
 import 'package:rewards_wallet/sizes.dart';
 
@@ -131,7 +133,6 @@ class Fab extends StatefulWidget {
 }
 
 class _FabState extends State<Fab> {
-  int selected;
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -164,6 +165,13 @@ class AddActivityDialog extends StatefulWidget {
 
 class _AddActivityDialogState extends State<AddActivityDialog> {
   int selected;
+  TextEditingController event;
+  TextEditingController points;
+  TextEditingController span;
+  String eventName;
+  int pointsCount;
+  double spanTime;
+  String eventType;
   @override
   Widget build(BuildContext context) {
     return _SystemPadding(
@@ -196,6 +204,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                           onTap: () {
                             setState(() {
                               selected = 1;
+                              eventType = 'Work';
                             });
                           },
                           child: AnimatedContainer(
@@ -234,6 +243,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                           onTap: () {
                             setState(() {
                               selected = 2;
+                              eventType = 'Reward';
                             });
                           },
                           child: AnimatedContainer(
@@ -283,6 +293,10 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                           child: Material(
                             type: MaterialType.transparency,
                             child: TextField(
+                              onChanged: (value) {
+                                eventName = value;
+                              },
+                              controller: event,
                               style: TextStyle(
                                 fontFamily: 'OpenSans',
                                 color: mainColor,
@@ -331,6 +345,10 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                             child: Material(
                               type: MaterialType.transparency,
                               child: TextField(
+                                controller: points,
+                                onChanged: (value) {
+                                  pointsCount = int.parse(value);
+                                },
                                 style: TextStyle(
                                   fontFamily: 'OpenSans',
                                   color: mainColor,
@@ -369,6 +387,10 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                             child: Material(
                               type: MaterialType.transparency,
                               child: TextField(
+                                controller: span,
+                                onChanged: (value) {
+                                  spanTime = double.parse(value);
+                                },
                                 style: TextStyle(
                                   fontFamily: 'OpenSans',
                                   color: mainColor,
@@ -440,7 +462,50 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                             ),
                           ),
                           onPressed: () {
-                            print('hello');
+                            if (eventName != '' &&
+                                pointsCount > 0 &&
+                                eventType != '' &&
+                                spanTime > 0) {
+                              Activity activity = Activity(
+                                  eventName,
+                                  (eventType == 'Work')
+                                      ? pointsCount
+                                      : -pointsCount,
+                                  eventType,
+                                  spanTime);
+                              activityList.add(activity);
+                              setState(() {
+                                totalPoints();
+                                navigator.pop(context);
+                              });
+                              print(activityList.length);
+                            } else {
+                              Get.snackbar(
+                                'Error',
+                                'One or more field are empty',
+                                dismissDirection:
+                                    SnackDismissDirection.VERTICAL,
+                                backgroundColor: bgColor,
+                                borderRadius: 5,
+                                barBlur: 0,
+                                titleText: Text(
+                                  'Error',
+                                  style: TextStyle(
+                                    fontFamily: 'OpenSans',
+                                    color: mainColor,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                messageText: Text(
+                                  'One or more fields are invalid',
+                                  style: TextStyle(
+                                    fontFamily: 'OpenSans',
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              );
+                            }
                           },
                           color: mainColor,
                           splashColor: mainColor,
