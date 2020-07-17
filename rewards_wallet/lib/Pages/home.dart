@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:rewards_wallet/Pages/homescreen.dart';
+import 'package:rewards_wallet/Pages/settings.dart';
 import 'package:rewards_wallet/colors.dart';
 import 'package:rewards_wallet/sizes.dart';
 
@@ -12,251 +15,336 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          Spacer(
-            flex: 2,
-          ),
-          AspectRatio(
-            aspectRatio: 375 / 128,
-            child: AnimatedContainer(
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  spreadRadius: -displayWidth(context) * 0.12,
-                  offset: Offset(0, displayHeight(context) * 0.05),
-                  blurRadius: 8,
-                ),
-              ]),
-              //height: displayHeight(context) * 0.2,
-              width: displayWidth(context),
-              duration: Duration(
-                milliseconds: 300,
-              ),
-              child: CustomPaint(
-                painter: PointsPainter(),
-              ),
-            ),
-          ),
-          Spacer(
-            flex: 2,
-          ),
-          Container(
-            width: displayWidth(context) * 0.8,
-            child: AspectRatio(
-              aspectRatio: 375 / 65,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: displayWidth(context) * 0.35,
-                    height: displayWidth(context) * 0.15,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0, 3),
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                        ),
-                      ],
+      child: Center(
+        child: AnimatedContainer(
+          decoration: BoxDecoration(
+            color: (selectedScreen == 0) ? bgColor : mainColor,
+            borderRadius:
+                (selectedScreen == 0) ? null : BorderRadius.circular(10),
+            boxShadow: [
+              (selectedScreen == 0)
+                  ? BoxShadow(
+                      offset: Offset(0, 0),
+                      color: Colors.transparent,
+                    )
+                  : BoxShadow(
+                      offset: Offset(0, 5),
+                      color: Colors.black38,
+                      blurRadius: 20,
+                      spreadRadius: -5,
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: RaisedButton(
-                        child: Center(
+            ],
+          ),
+          width: (selectedScreen == 0)
+              ? displayWidth(context)
+              : displayWidth(context) * 0.85,
+          height: (selectedScreen == 0)
+              ? displayHeight(context)
+              : displayWidth(context) * 1.4,
+          duration: Duration(
+            milliseconds: 200,
+          ),
+          child: (selectedScreen == 0)
+              ? Column(
+                  children: [
+                    Spacer(
+                      flex: 2,
+                    ),
+                    AspectRatio(
+                      aspectRatio: 375 / 128,
+                      child: AnimatedContainer(
+                        decoration: BoxDecoration(boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            spreadRadius: -displayWidth(context) * 0.12,
+                            offset: Offset(0, displayHeight(context) * 0.05),
+                            blurRadius: 8,
+                          ),
+                        ]),
+                        //height: displayHeight(context) * 0.2,
+                        width: displayWidth(context),
+                        duration: Duration(
+                          milliseconds: 300,
+                        ),
+                        child: CustomPaint(
+                          painter: PointsPainter(),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/images/dumbbell.png',
-                                width: displayWidth(context) * 0.06,
-                              ),
                               Text(
-                                'Work',
+                                '140 P',
                                 style: TextStyle(
                                   fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: displayWidth(context) * 0.045,
-                                  color: redColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: displayWidth(context) * 0.1,
+                                  color: bgColor,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        onPressed: () {
-                          print('hello');
-                        },
-                        color: bgColor,
-                        splashColor: redColor,
-                        disabledColor: bgColor,
                       ),
                     ),
-                  ),
-                  Container(
-                    width: displayWidth(context) * 0.35,
-                    height: displayWidth(context) * 0.15,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0, 3),
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                        ),
-                      ],
+                    Spacer(
+                      flex: 2,
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: RaisedButton(
+                    Container(
+                      width: displayWidth(context) * 0.8,
+                      child: AspectRatio(
+                        aspectRatio: 375 / 65,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset(
-                              'assets/images/trophy.png',
-                              width: displayWidth(context) * 0.06,
+                            Container(
+                              width: displayWidth(context) * 0.35,
+                              height: displayWidth(context) * 0.15,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    offset: Offset(0, 3),
+                                    spreadRadius: 0,
+                                    blurRadius: 5,
+                                  ),
+                                ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: RaisedButton(
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/dumbbell.png',
+                                          width: displayWidth(context) * 0.06,
+                                        ),
+                                        Text(
+                                          'Work',
+                                          style: TextStyle(
+                                            fontFamily: 'OpenSans',
+                                            fontWeight: FontWeight.w400,
+                                            fontSize:
+                                                displayWidth(context) * 0.045,
+                                            color: redColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    showMaterialModalBottomSheet(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      context: context,
+                                      builder: (context, scrollController) =>
+                                          Container(
+                                        width: displayWidth(context),
+                                        height: displayWidth(context) * 1.2,
+                                        decoration: BoxDecoration(),
+                                      ),
+                                    );
+                                  },
+                                  color: bgColor,
+                                  splashColor: redColor,
+                                  disabledColor: bgColor,
+                                ),
+                              ),
                             ),
-                            Text(
-                              'Reward',
-                              style: TextStyle(
-                                fontFamily: 'OpenSans',
-                                fontWeight: FontWeight.w400,
-                                fontSize: displayWidth(context) * 0.045,
-                                color: tealColor,
+                            Container(
+                              width: displayWidth(context) * 0.35,
+                              height: displayWidth(context) * 0.15,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    offset: Offset(0, 3),
+                                    spreadRadius: 0,
+                                    blurRadius: 5,
+                                  ),
+                                ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: RaisedButton(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/trophy.png',
+                                        width: displayWidth(context) * 0.06,
+                                      ),
+                                      Text(
+                                        'Reward',
+                                        style: TextStyle(
+                                          fontFamily: 'OpenSans',
+                                          fontWeight: FontWeight.w400,
+                                          fontSize:
+                                              displayWidth(context) * 0.045,
+                                          color: tealColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    showMaterialModalBottomSheet(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      context: context,
+                                      builder: (context, scrollController) =>
+                                          Container(
+                                        width: displayWidth(context),
+                                        height: displayWidth(context) * 1.2,
+                                        decoration: BoxDecoration(),
+                                      ),
+                                    );
+                                  },
+                                  color: bgColor,
+                                  splashColor: tealColor,
+                                  disabledColor: bgColor,
+                                ),
                               ),
                             ),
                           ],
                         ),
-                        onPressed: () {
-                          print('hello');
-                        },
-                        color: bgColor,
-                        splashColor: tealColor,
-                        disabledColor: bgColor,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Spacer(
-            flex: 2,
-          ),
-          Container(
-            width: displayWidth(context) * 0.8,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.history,
-                  size: displayWidth(context) * 0.05,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  'History',
-                  style: TextStyle(
-                    fontFamily: 'OpenSans',
-                    fontWeight: FontWeight.w600,
-                    fontSize: displayWidth(context) * 0.04,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            width: displayWidth(context) * 0.8,
-            child: AspectRatio(
-              aspectRatio: 375 / 440,
-              child: ListView(
-                padding: EdgeInsets.all(2),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 7.0,
-                      bottom: 7.0,
+                    Spacer(
+                      flex: 2,
                     ),
-                    child: AnimatedContainer(
-                      duration: Duration(
-                        milliseconds: 200,
-                      ),
-                      height: displayWidth(context) * 0.13,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            offset: Offset(0, 3),
-                            spreadRadius: 0,
-                            blurRadius: 5,
+                    Container(
+                      width: displayWidth(context) * 0.8,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.history,
+                            size: displayWidth(context) * 0.05,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'History',
+                            style: TextStyle(
+                              fontFamily: 'OpenSans',
+                              fontWeight: FontWeight.w600,
+                              fontSize: displayWidth(context) * 0.04,
+                              color: Colors.black,
+                            ),
                           ),
                         ],
-                        color: bgColor,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 10.0,
-                          right: 10.0,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: displayWidth(context) * 0.8,
+                      child: AspectRatio(
+                        aspectRatio: 375 / 440,
+                        child: ListView(
+                          padding: EdgeInsets.all(2),
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Reading',
-                                  style: TextStyle(
-                                    fontFamily: 'OpenSans',
-                                    color: redColor,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: displayWidth(context) * 0.045,
-                                  ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 7.0,
+                                bottom: 7.0,
+                              ),
+                              child: AnimatedContainer(
+                                duration: Duration(
+                                  milliseconds: 200,
                                 ),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      '+10',
-                                      style: TextStyle(
-                                        fontFamily: 'OpenSans',
-                                        color: redColor,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: displayWidth(context) * 0.045,
-                                      ),
-                                    ),
-                                    Text(
-                                      ' P',
-                                      style: TextStyle(
-                                        fontFamily: 'OpenSans',
-                                        color: redColor,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: displayWidth(context) * 0.045,
-                                      ),
+                                height: displayWidth(context) * 0.13,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      offset: Offset(0, 3),
+                                      spreadRadius: 0,
+                                      blurRadius: 5,
                                     ),
                                   ],
+                                  color: bgColor,
                                 ),
-                              ],
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 10.0,
+                                    right: 10.0,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Reading',
+                                            style: TextStyle(
+                                              fontFamily: 'OpenSans',
+                                              color: redColor,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize:
+                                                  displayWidth(context) * 0.045,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                '+10',
+                                                style: TextStyle(
+                                                  fontFamily: 'OpenSans',
+                                                  color: redColor,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize:
+                                                      displayWidth(context) *
+                                                          0.045,
+                                                ),
+                                              ),
+                                              Text(
+                                                ' P',
+                                                style: TextStyle(
+                                                  fontFamily: 'OpenSans',
+                                                  color: redColor,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize:
+                                                      displayWidth(context) *
+                                                          0.045,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+                  ],
+                )
+              : Column(
+                  children: [
+                    SettingsPage(),
+                  ],
+                ),
+        ),
       ),
     );
   }

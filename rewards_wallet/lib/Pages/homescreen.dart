@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rewards_wallet/Pages/home.dart';
-import 'package:rewards_wallet/Pages/settings.dart';
 import 'package:rewards_wallet/colors.dart';
 import 'package:rewards_wallet/sizes.dart';
 
@@ -119,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          body: (selectedScreen == 0) ? HomePage() : SettingsPage(),
+          body: HomePage(),
         ),
       ),
     );
