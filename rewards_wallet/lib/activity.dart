@@ -13,11 +13,12 @@ class Activity {
 }
 
 List<Activity> activityList = [];
+
 int points = 0;
 
 void addActivity(Activity activity) {
-  activityList.add(activity);
-  print(activityList.length);
+  activityList.insert(0, activity);
+  print(activityList);
 }
 
 void totalPoints() {

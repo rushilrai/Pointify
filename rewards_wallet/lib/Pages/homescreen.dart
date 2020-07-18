@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rewards_wallet/Pages/home.dart';
-import 'package:rewards_wallet/activity.dart';
 import 'package:rewards_wallet/colors.dart';
 import 'package:rewards_wallet/sizes.dart';
+
+import '../activity.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -165,13 +166,39 @@ class AddActivityDialog extends StatefulWidget {
 
 class _AddActivityDialogState extends State<AddActivityDialog> {
   int selected;
-  TextEditingController event;
-  TextEditingController points;
-  TextEditingController span;
+  TextEditingController event = TextEditingController();
+  TextEditingController points = TextEditingController();
+  TextEditingController span = TextEditingController();
+
   String eventName;
   int pointsCount;
   double spanTime;
   String eventType;
+  @override
+  void initState() {
+    event.addListener(() {
+      eventName = event.text;
+      print(eventName);
+    });
+    points.addListener(() {
+      if (points.text.length > 0) {
+        pointsCount = int.parse(points.text);
+      } else {
+        pointsCount = 0;
+      }
+      print(points.text.length);
+    });
+    span.addListener(() {
+      if (span.text.length > 0) {
+        spanTime = double.parse(span.text);
+      } else {
+        spanTime = 0.0;
+      }
+      print(span.text.length);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return _SystemPadding(
@@ -293,9 +320,6 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                           child: Material(
                             type: MaterialType.transparency,
                             child: TextField(
-                              onChanged: (value) {
-                                eventName = value;
-                              },
                               controller: event,
                               style: TextStyle(
                                 fontFamily: 'OpenSans',
@@ -346,9 +370,6 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                               type: MaterialType.transparency,
                               child: TextField(
                                 controller: points,
-                                onChanged: (value) {
-                                  pointsCount = int.parse(value);
-                                },
                                 style: TextStyle(
                                   fontFamily: 'OpenSans',
                                   color: mainColor,
@@ -388,9 +409,6 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                               type: MaterialType.transparency,
                               child: TextField(
                                 controller: span,
-                                onChanged: (value) {
-                                  spanTime = double.parse(value);
-                                },
                                 style: TextStyle(
                                   fontFamily: 'OpenSans',
                                   color: mainColor,
@@ -410,7 +428,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                                     ),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
-                                  labelText: 'Span',
+                                  labelText: 'Hrs',
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                   labelStyle: TextStyle(
@@ -462,10 +480,42 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                             ),
                           ),
                           onPressed: () {
-                            if (eventName != '' &&
-                                pointsCount > 0 &&
-                                eventType != '' &&
-                                spanTime > 0) {
+                            if (event.text.length == 0) {
+                              Get.snackbar(
+                                'Error',
+                                'Add Event Name',
+                                backgroundColor: bgColor,
+                                barBlur: 0,
+                                borderRadius: 5,
+                              );
+                            }
+                            if (span.text.length == 0) {
+                              Get.snackbar(
+                                'Error',
+                                'Add Duration of Activity',
+                                backgroundColor: bgColor,
+                                barBlur: 0,
+                                borderRadius: 5,
+                              );
+                            }
+                            if (points.text.length == 0) {
+                              Get.snackbar(
+                                'Error',
+                                'Add Points',
+                                backgroundColor: bgColor,
+                                barBlur: 0,
+                                borderRadius: 5,
+                              );
+                            }
+                            if (!(selected == 1 || selected == 2)) {
+                              Get.snackbar(
+                                'Error',
+                                'Select a Type',
+                                backgroundColor: bgColor,
+                                barBlur: 0,
+                                borderRadius: 5,
+                              );
+                            } else {
                               Activity activity = Activity(
                                   eventName,
                                   (eventType == 'Work')
@@ -473,38 +523,12 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                                       : -pointsCount,
                                   eventType,
                                   spanTime);
-                              activityList.add(activity);
+                              addActivity(activity);
+
                               setState(() {
                                 totalPoints();
                                 navigator.pop(context);
                               });
-                              print(activityList.length);
-                            } else {
-                              Get.snackbar(
-                                'Error',
-                                'One or more field are empty',
-                                dismissDirection:
-                                    SnackDismissDirection.VERTICAL,
-                                backgroundColor: bgColor,
-                                borderRadius: 5,
-                                barBlur: 0,
-                                titleText: Text(
-                                  'Error',
-                                  style: TextStyle(
-                                    fontFamily: 'OpenSans',
-                                    color: mainColor,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),
-                                messageText: Text(
-                                  'One or more fields are invalid',
-                                  style: TextStyle(
-                                    fontFamily: 'OpenSans',
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              );
                             }
                           },
                           color: mainColor,
@@ -538,3 +562,19 @@ class _SystemPadding extends StatelessWidget {
         child: child);
   }
 }
+
+/*
+Activity activity = Activity(
+                                  eventName,
+                                  (eventType == 'Work')
+                                      ? pointsCount
+                                      : -pointsCount,
+                                  eventType,
+                                  spanTime);
+                              addActivity(activity);
+
+                              setState(() {
+                                totalPoints();
+                                navigator.pop(context);
+                              });
+                              */
