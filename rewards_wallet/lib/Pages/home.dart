@@ -21,7 +21,8 @@ class _HomePageState extends State<HomePage> {
       child: Center(
         child: AnimatedContainer(
           decoration: BoxDecoration(
-            color: (selectedScreen == 0) ? bgColor : mainColor,
+            color:
+                (selectedScreen == 0) ? Theme.of(context).cardColor : mainColor,
             borderRadius:
                 (selectedScreen == 0) ? null : BorderRadius.circular(10),
             boxShadow: [
@@ -70,7 +71,10 @@ class _HomePageState extends State<HomePage> {
                           milliseconds: 300,
                         ),
                         child: CustomPaint(
-                          painter: PointsPainter(),
+                          painter:
+                              (Theme.of(context).brightness == Brightness.light)
+                                  ? PointsPainter()
+                                  : PointsPainterDark(),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -144,255 +148,252 @@ class _HomePageState extends State<HomePage> {
                                               BorderRadius.circular(10)),
                                       context: context,
                                       builder: (context, scrollController) =>
-                                          Container(
-                                        width: displayWidth(context),
-                                        height: displayWidth(context) * 1.2,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Work',
-                                                    style: TextStyle(
-                                                      fontFamily: 'OpenSans',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: displayWidth(
-                                                              context) *
-                                                          0.05,
-                                                      color: redColor,
+                                          ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          color: Theme.of(context).primaryColor,
+                                          width: displayWidth(context),
+                                          height: displayWidth(context) * 1.2,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Work',
+                                                      style: TextStyle(
+                                                        fontFamily: 'OpenSans',
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: displayWidth(
+                                                                context) *
+                                                            0.05,
+                                                        color: redColor,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              AspectRatio(
-                                                aspectRatio: 375 / 360,
-                                                child: ListView.builder(
-                                                  itemCount:
-                                                      activityList.length,
-                                                  shrinkWrap: true,
-                                                  padding: EdgeInsets.all(2),
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return (activityList[index]
-                                                                .type ==
-                                                            'Work')
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              top: 7.0,
-                                                              bottom: 7.0,
-                                                            ),
-                                                            child: Row(
-                                                              children: [
-                                                                AnimatedContainer(
-                                                                  duration:
-                                                                      Duration(
-                                                                    milliseconds:
-                                                                        200,
-                                                                  ),
-                                                                  height: displayWidth(
-                                                                          context) *
-                                                                      0.13,
-                                                                  width: displayWidth(
-                                                                          context) *
-                                                                      0.7,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        color: Colors
-                                                                            .black12,
-                                                                        offset: Offset(
-                                                                            0,
-                                                                            3),
-                                                                        spreadRadius:
-                                                                            0,
-                                                                        blurRadius:
-                                                                            5,
-                                                                      ),
-                                                                    ],
-                                                                    color:
-                                                                        bgColor,
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                      left:
-                                                                          10.0,
-                                                                      right:
-                                                                          10.0,
-                                                                    ),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                AspectRatio(
+                                                  aspectRatio: 375 / 360,
+                                                  child:
+                                                      (activityList.length > 0)
+                                                          ? ListView.builder(
+                                                              physics:
+                                                                  BouncingScrollPhysics(),
+                                                              itemCount:
+                                                                  activityList
+                                                                      .length,
+                                                              shrinkWrap: true,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(2),
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      index) {
+                                                                return (activityList[index]
+                                                                            .type ==
+                                                                        'Work')
+                                                                    ? Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                          top:
+                                                                              7.0,
+                                                                          bottom:
+                                                                              7.0,
+                                                                        ),
+                                                                        child:
+                                                                            Row(
                                                                           children: [
+                                                                            AnimatedContainer(
+                                                                              duration: Duration(
+                                                                                milliseconds: 200,
+                                                                              ),
+                                                                              height: displayWidth(context) * 0.13,
+                                                                              width: displayWidth(context) * 0.7,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(5),
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: Colors.black12,
+                                                                                    offset: Offset(0, 3),
+                                                                                    spreadRadius: 0,
+                                                                                    blurRadius: 5,
+                                                                                  ),
+                                                                                ],
+                                                                                color: Theme.of(context).buttonColor,
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.only(
+                                                                                  left: 10.0,
+                                                                                  right: 10.0,
+                                                                                ),
+                                                                                child: Row(
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  children: [
+                                                                                    Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          activityList[index].title,
+                                                                                          style: TextStyle(
+                                                                                            fontFamily: 'OpenSans',
+                                                                                            color: redColor,
+                                                                                            fontWeight: FontWeight.w400,
+                                                                                            fontSize: displayWidth(context) * 0.045,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              activityList[index].points.toString(),
+                                                                                              style: TextStyle(
+                                                                                                fontFamily: 'OpenSans',
+                                                                                                color: redColor,
+                                                                                                fontWeight: FontWeight.w400,
+                                                                                                fontSize: displayWidth(context) * 0.045,
+                                                                                              ),
+                                                                                            ),
+                                                                                            Text(
+                                                                                              ' P',
+                                                                                              style: TextStyle(
+                                                                                                fontFamily: 'OpenSans',
+                                                                                                color: redColor,
+                                                                                                fontWeight: FontWeight.w400,
+                                                                                                fontSize: displayWidth(context) * 0.045,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                            Spacer(),
+                                                                            Icon(
+                                                                              Icons.alarm,
+                                                                              color: Theme.of(context).textSelectionColor,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: 05,
+                                                                            ),
                                                                             Text(
-                                                                              activityList[index].title,
+                                                                              activityList[index].duration.toString() + 'Hr',
                                                                               style: TextStyle(
                                                                                 fontFamily: 'OpenSans',
-                                                                                color: redColor,
+                                                                                color: Theme.of(context).textSelectionColor,
                                                                                 fontWeight: FontWeight.w400,
                                                                                 fontSize: displayWidth(context) * 0.045,
                                                                               ),
                                                                             ),
                                                                           ],
                                                                         ),
-                                                                        Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Row(
-                                                                              children: [
-                                                                                Text(
-                                                                                  activityList[index].points.toString(),
-                                                                                  style: TextStyle(
-                                                                                    fontFamily: 'OpenSans',
-                                                                                    color: redColor,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    fontSize: displayWidth(context) * 0.045,
-                                                                                  ),
-                                                                                ),
-                                                                                Text(
-                                                                                  ' P',
-                                                                                  style: TextStyle(
-                                                                                    fontFamily: 'OpenSans',
-                                                                                    color: redColor,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    fontSize: displayWidth(context) * 0.045,
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
+                                                                      )
+                                                                    : SizedBox(
+                                                                        height:
+                                                                            0,
+                                                                      );
+                                                              },
+                                                            )
+                                                          : Center(
+                                                              child: Text(
+                                                                'No Events Added',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'OpenSans',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color:
+                                                                      mainColor,
                                                                 ),
-                                                                Spacer(),
-                                                                Icon(
-                                                                  Icons.alarm,
-                                                                  color: Colors
-                                                                      .black,
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 05,
-                                                                ),
-                                                                Text(
-                                                                  activityList[
-                                                                              index]
-                                                                          .duration
-                                                                          .toString() +
-                                                                      'Hr',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontFamily:
-                                                                        'OpenSans',
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        displayWidth(context) *
-                                                                            0.045,
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                              ),
                                                             ),
-                                                          )
-                                                        : SizedBox(
-                                                            height: 0,
-                                                          );
-                                                  },
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    width:
-                                                        displayWidth(context) *
-                                                            0.4,
-                                                    height:
-                                                        displayWidth(context) *
-                                                            0.1,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      child: RaisedButton(
-                                                        child: Center(
-                                                          child: Text(
-                                                            'Add New',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'OpenSans',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: bgColor,
-                                                              fontSize:
-                                                                  displayWidth(
-                                                                          context) *
-                                                                      0.04,
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      width: displayWidth(
+                                                              context) *
+                                                          0.4,
+                                                      height: displayWidth(
+                                                              context) *
+                                                          0.1,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        child: RaisedButton(
+                                                          child: Center(
+                                                            child: Text(
+                                                              'Add New',
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'OpenSans',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: bgColor,
+                                                                fontSize:
+                                                                    displayWidth(
+                                                                            context) *
+                                                                        0.04,
+                                                              ),
                                                             ),
                                                           ),
+                                                          onPressed: () {
+                                                            navigator
+                                                                .pop(context);
+                                                            showDialog(
+                                                              barrierColor:
+                                                                  Colors
+                                                                      .black54,
+                                                              useSafeArea: true,
+                                                              context: context,
+                                                              builder:
+                                                                  (context) =>
+                                                                      Center(
+                                                                child:
+                                                                    AddActivityDialog(),
+                                                              ),
+                                                            );
+                                                          },
+                                                          color: mainColor,
+                                                          splashColor:
+                                                              mainColor,
+                                                          disabledColor:
+                                                              bgColor,
                                                         ),
-                                                        onPressed: () {
-                                                          navigator
-                                                              .pop(context);
-                                                          showDialog(
-                                                            barrierColor:
-                                                                Colors.black54,
-                                                            useSafeArea: true,
-                                                            context: context,
-                                                            builder:
-                                                                (context) =>
-                                                                    Center(
-                                                              child:
-                                                                  AddActivityDialog(),
-                                                            ),
-                                                          );
-                                                        },
-                                                        color: mainColor,
-                                                        splashColor: mainColor,
-                                                        disabledColor: bgColor,
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     );
                                   },
-                                  color: bgColor,
+                                  color: Theme.of(context).buttonColor,
                                   splashColor: redColor,
                                   disabledColor: bgColor,
                                 ),
@@ -442,256 +443,256 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       context: context,
                                       builder: (context, scrollController) =>
-                                          Container(
-                                        width: displayWidth(context),
-                                        height: displayWidth(context) * 1.2,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    'Reward',
-                                                    style: TextStyle(
-                                                      fontFamily: 'OpenSans',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: displayWidth(
-                                                              context) *
-                                                          0.05,
-                                                      color: tealColor,
+                                          ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                          width: displayWidth(context),
+                                          height: displayWidth(context) * 1.2,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Reward',
+                                                      style: TextStyle(
+                                                        fontFamily: 'OpenSans',
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: displayWidth(
+                                                                context) *
+                                                            0.05,
+                                                        color: tealColor,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              AspectRatio(
-                                                aspectRatio: 375 / 360,
-                                                child: ListView.builder(
-                                                  itemCount:
-                                                      activityList.length,
-                                                  shrinkWrap: true,
-                                                  reverse: false,
-                                                  padding: EdgeInsets.all(2),
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return (activityList[index]
-                                                                .type ==
-                                                            'Reward')
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              top: 7.0,
-                                                              bottom: 7.0,
-                                                            ),
-                                                            child: Row(
-                                                              children: [
-                                                                AnimatedContainer(
-                                                                  duration:
-                                                                      Duration(
-                                                                    milliseconds:
-                                                                        200,
-                                                                  ),
-                                                                  height: displayWidth(
-                                                                          context) *
-                                                                      0.13,
-                                                                  width: displayWidth(
-                                                                          context) *
-                                                                      0.7,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        color: Colors
-                                                                            .black12,
-                                                                        offset: Offset(
-                                                                            0,
-                                                                            3),
-                                                                        spreadRadius:
-                                                                            0,
-                                                                        blurRadius:
-                                                                            5,
-                                                                      ),
-                                                                    ],
-                                                                    color:
-                                                                        bgColor,
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                      left:
-                                                                          10.0,
-                                                                      right:
-                                                                          10.0,
-                                                                    ),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                AspectRatio(
+                                                  aspectRatio: 375 / 360,
+                                                  child:
+                                                      (activityList.length > 0)
+                                                          ? ListView.builder(
+                                                              physics:
+                                                                  BouncingScrollPhysics(),
+                                                              itemCount:
+                                                                  activityList
+                                                                      .length,
+                                                              shrinkWrap: true,
+                                                              reverse: false,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(2),
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      index) {
+                                                                return (activityList[index]
+                                                                            .type ==
+                                                                        'Reward')
+                                                                    ? Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.only(
+                                                                          top:
+                                                                              7.0,
+                                                                          bottom:
+                                                                              7.0,
+                                                                        ),
+                                                                        child:
+                                                                            Row(
                                                                           children: [
+                                                                            AnimatedContainer(
+                                                                              duration: Duration(
+                                                                                milliseconds: 200,
+                                                                              ),
+                                                                              height: displayWidth(context) * 0.13,
+                                                                              width: displayWidth(context) * 0.7,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(5),
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: Colors.black12,
+                                                                                    offset: Offset(0, 3),
+                                                                                    spreadRadius: 0,
+                                                                                    blurRadius: 5,
+                                                                                  ),
+                                                                                ],
+                                                                                color: Theme.of(context).buttonColor,
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.only(
+                                                                                  left: 10.0,
+                                                                                  right: 10.0,
+                                                                                ),
+                                                                                child: Row(
+                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                  children: [
+                                                                                    Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          activityList[index].title,
+                                                                                          style: TextStyle(
+                                                                                            fontFamily: 'OpenSans',
+                                                                                            color: tealColor,
+                                                                                            fontWeight: FontWeight.w400,
+                                                                                            fontSize: displayWidth(context) * 0.045,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              activityList[index].points.toString(),
+                                                                                              style: TextStyle(
+                                                                                                fontFamily: 'OpenSans',
+                                                                                                color: tealColor,
+                                                                                                fontWeight: FontWeight.w400,
+                                                                                                fontSize: displayWidth(context) * 0.045,
+                                                                                              ),
+                                                                                            ),
+                                                                                            Text(
+                                                                                              ' P',
+                                                                                              style: TextStyle(
+                                                                                                fontFamily: 'OpenSans',
+                                                                                                color: tealColor,
+                                                                                                fontWeight: FontWeight.w400,
+                                                                                                fontSize: displayWidth(context) * 0.045,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                            Spacer(),
+                                                                            Icon(
+                                                                              Icons.alarm,
+                                                                              color: Theme.of(context).textSelectionColor,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: 05,
+                                                                            ),
                                                                             Text(
-                                                                              activityList[index].title,
+                                                                              activityList[index].duration.toString() + 'Hr',
                                                                               style: TextStyle(
                                                                                 fontFamily: 'OpenSans',
-                                                                                color: tealColor,
+                                                                                color: Theme.of(context).textSelectionColor,
                                                                                 fontWeight: FontWeight.w400,
                                                                                 fontSize: displayWidth(context) * 0.045,
                                                                               ),
                                                                             ),
                                                                           ],
                                                                         ),
-                                                                        Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Row(
-                                                                              children: [
-                                                                                Text(
-                                                                                  activityList[index].points.toString(),
-                                                                                  style: TextStyle(
-                                                                                    fontFamily: 'OpenSans',
-                                                                                    color: tealColor,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    fontSize: displayWidth(context) * 0.045,
-                                                                                  ),
-                                                                                ),
-                                                                                Text(
-                                                                                  ' P',
-                                                                                  style: TextStyle(
-                                                                                    fontFamily: 'OpenSans',
-                                                                                    color: tealColor,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    fontSize: displayWidth(context) * 0.045,
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
+                                                                      )
+                                                                    : SizedBox(
+                                                                        height:
+                                                                            0,
+                                                                      );
+                                                              },
+                                                            )
+                                                          : Center(
+                                                              child: Text(
+                                                                'No Events Added',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'OpenSans',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color:
+                                                                      mainColor,
                                                                 ),
-                                                                Spacer(),
-                                                                Icon(
-                                                                  Icons.alarm,
-                                                                  color: Colors
-                                                                      .black,
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 05,
-                                                                ),
-                                                                Text(
-                                                                  activityList[
-                                                                              index]
-                                                                          .duration
-                                                                          .toString() +
-                                                                      'Hr',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontFamily:
-                                                                        'OpenSans',
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        displayWidth(context) *
-                                                                            0.045,
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                              ),
                                                             ),
-                                                          )
-                                                        : SizedBox(
-                                                            height: 0,
-                                                          );
-                                                  },
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    width:
-                                                        displayWidth(context) *
-                                                            0.4,
-                                                    height:
-                                                        displayWidth(context) *
-                                                            0.1,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      child: RaisedButton(
-                                                        child: Center(
-                                                          child: Text(
-                                                            'Add New',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'OpenSans',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: bgColor,
-                                                              fontSize:
-                                                                  displayWidth(
-                                                                          context) *
-                                                                      0.04,
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      width: displayWidth(
+                                                              context) *
+                                                          0.4,
+                                                      height: displayWidth(
+                                                              context) *
+                                                          0.1,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        child: RaisedButton(
+                                                          child: Center(
+                                                            child: Text(
+                                                              'Add New',
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'OpenSans',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: bgColor,
+                                                                fontSize:
+                                                                    displayWidth(
+                                                                            context) *
+                                                                        0.04,
+                                                              ),
                                                             ),
                                                           ),
+                                                          onPressed: () {
+                                                            navigator
+                                                                .pop(context);
+                                                            showDialog(
+                                                              barrierColor:
+                                                                  Colors
+                                                                      .black54,
+                                                              useSafeArea: true,
+                                                              context: context,
+                                                              builder:
+                                                                  (context) =>
+                                                                      Center(
+                                                                child:
+                                                                    AddActivityDialog(),
+                                                              ),
+                                                            );
+                                                          },
+                                                          color: mainColor,
+                                                          splashColor:
+                                                              mainColor,
+                                                          disabledColor:
+                                                              bgColor,
                                                         ),
-                                                        onPressed: () {
-                                                          navigator
-                                                              .pop(context);
-                                                          showDialog(
-                                                            barrierColor:
-                                                                Colors.black54,
-                                                            useSafeArea: true,
-                                                            context: context,
-                                                            builder:
-                                                                (context) =>
-                                                                    Center(
-                                                              child:
-                                                                  AddActivityDialog(),
-                                                            ),
-                                                          );
-                                                        },
-                                                        color: mainColor,
-                                                        splashColor: mainColor,
-                                                        disabledColor: bgColor,
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     );
                                   },
-                                  color: bgColor,
+                                  color: Theme.of(context).buttonColor,
                                   splashColor: tealColor,
                                   disabledColor: bgColor,
                                 ),
@@ -711,6 +712,7 @@ class _HomePageState extends State<HomePage> {
                           Icon(
                             Icons.history,
                             size: displayWidth(context) * 0.05,
+                            color: Theme.of(context).textSelectionColor,
                           ),
                           SizedBox(
                             width: 5,
@@ -721,7 +723,7 @@ class _HomePageState extends State<HomePage> {
                               fontFamily: 'OpenSans',
                               fontWeight: FontWeight.w600,
                               fontSize: displayWidth(context) * 0.04,
-                              color: Colors.black,
+                              color: Theme.of(context).textSelectionColor,
                             ),
                           ),
                         ],
@@ -734,110 +736,127 @@ class _HomePageState extends State<HomePage> {
                       width: displayWidth(context) * 0.8,
                       child: AspectRatio(
                         aspectRatio: 375 / 440,
-                        child: ListView.builder(
-                          padding: EdgeInsets.all(2),
-                          itemCount: activityList.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                top: 7.0,
-                                bottom: 7.0,
-                              ),
-                              child: AnimatedContainer(
-                                duration: Duration(
-                                  milliseconds: 200,
-                                ),
-                                height: displayWidth(context) * 0.13,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      offset: Offset(0, 3),
-                                      spreadRadius: 0,
-                                      blurRadius: 5,
+                        child: (activityList.length > 0)
+                            ? ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                padding: EdgeInsets.all(2),
+                                itemCount: activityList.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 7.0,
+                                      bottom: 7.0,
                                     ),
-                                  ],
-                                  color: bgColor,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 10.0,
-                                    right: 10.0,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            activityList[index].title,
-                                            style: TextStyle(
-                                              fontFamily: 'OpenSans',
-                                              color:
-                                                  (activityList[index].type ==
-                                                          'Work')
-                                                      ? redColor
-                                                      : tealColor,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize:
-                                                  displayWidth(context) * 0.045,
+                                    child: AnimatedContainer(
+                                      duration: Duration(
+                                        milliseconds: 200,
+                                      ),
+                                      height: displayWidth(context) * 0.13,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            offset: Offset(0, 3),
+                                            spreadRadius: 0,
+                                            blurRadius: 5,
+                                          ),
+                                        ],
+                                        color: Theme.of(context).buttonColor,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 10.0,
+                                          right: 10.0,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  activityList[index].title,
+                                                  style: TextStyle(
+                                                    fontFamily: 'OpenSans',
+                                                    color: (activityList[index]
+                                                                .type ==
+                                                            'Work')
+                                                        ? redColor
+                                                        : tealColor,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize:
+                                                        displayWidth(context) *
+                                                            0.045,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                activityList[index]
-                                                    .points
-                                                    .toString(),
-                                                style: TextStyle(
-                                                  fontFamily: 'OpenSans',
-                                                  color: (activityList[index]
-                                                              .type ==
-                                                          'Work')
-                                                      ? redColor
-                                                      : tealColor,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize:
-                                                      displayWidth(context) *
-                                                          0.045,
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      activityList[index]
+                                                          .points
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                        fontFamily: 'OpenSans',
+                                                        color:
+                                                            (activityList[index]
+                                                                        .type ==
+                                                                    'Work')
+                                                                ? redColor
+                                                                : tealColor,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: displayWidth(
+                                                                context) *
+                                                            0.045,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      ' P',
+                                                      style: TextStyle(
+                                                        fontFamily: 'OpenSans',
+                                                        color:
+                                                            (activityList[index]
+                                                                        .type ==
+                                                                    'Work')
+                                                                ? redColor
+                                                                : tealColor,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: displayWidth(
+                                                                context) *
+                                                            0.045,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                              Text(
-                                                ' P',
-                                                style: TextStyle(
-                                                  fontFamily: 'OpenSans',
-                                                  color: (activityList[index]
-                                                              .type ==
-                                                          'Work')
-                                                      ? redColor
-                                                      : tealColor,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize:
-                                                      displayWidth(context) *
-                                                          0.045,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ],
+                                    ),
+                                  );
+                                },
+                              )
+                            : Center(
+                                child: Text(
+                                  'No Events Added',
+                                  style: TextStyle(
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.w600,
+                                    color: mainColor,
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                        ),
                       ),
                     ),
                   ],
@@ -862,6 +881,80 @@ class PointsPainter extends CustomPainter {
       ..strokeCap = StrokeCap.square;
     var paint2 = Paint()
       ..color = bgColor
+      ..strokeWidth = 1
+      ..strokeCap = StrokeCap.square;
+
+    canvas.drawRRect(
+        RRect.fromRectAndCorners(
+          Rect.fromCenter(
+            center: Offset(size.width / 2, size.height / 2),
+            width: size.width * 0.8,
+            height: size.height * 0.9,
+          ),
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
+        ),
+        paint);
+
+    canvas.drawCircle(
+      Offset(size.width * 0.9, size.height * 0.8),
+      size.width * 0.027,
+      paint2,
+    );
+    canvas.drawCircle(
+      Offset(size.width * 0.9, size.height * 0.6),
+      size.width * 0.027,
+      paint2,
+    );
+    canvas.drawCircle(
+      Offset(size.width * 0.9, size.height * 0.4),
+      size.width * 0.027,
+      paint2,
+    );
+    canvas.drawCircle(
+      Offset(size.width * 0.9, size.height * 0.2),
+      size.width * 0.027,
+      paint2,
+    );
+    canvas.drawCircle(
+      Offset(size.width * 0.1, size.height * 0.8),
+      size.width * 0.027,
+      paint2,
+    );
+    canvas.drawCircle(
+      Offset(size.width * 0.1, size.height * 0.6),
+      size.width * 0.027,
+      paint2,
+    );
+    canvas.drawCircle(
+      Offset(size.width * 0.1, size.height * 0.4),
+      size.width * 0.027,
+      paint2,
+    );
+    canvas.drawCircle(
+      Offset(size.width * 0.1, size.height * 0.2),
+      size.width * 0.027,
+      paint2,
+    );
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+class PointsPainterDark extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = mainColor
+      ..strokeWidth = 1
+      ..strokeCap = StrokeCap.square;
+    var paint2 = Paint()
+      ..color = darkColorOne
       ..strokeWidth = 1
       ..strokeCap = StrokeCap.square;
 

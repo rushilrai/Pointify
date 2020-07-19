@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:rewards_wallet/activity.dart';
 import 'package:rewards_wallet/colors.dart';
 import 'package:rewards_wallet/sizes.dart';
@@ -20,122 +21,6 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 10.0,
-            right: 10.0,
-            top: 10.0,
-          ),
-          child: Text(
-            'Theme',
-            style: TextStyle(
-              fontFamily: 'OpenSans',
-              fontWeight: FontWeight.w600,
-              color: bgColor,
-              fontSize: displayWidth(context) * 0.06,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              AnimatedContainer(
-                duration: Duration(milliseconds: 200),
-                width: displayWidth(context) * 0.35,
-                height: displayWidth(context) * 0.2,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 5),
-                      color: Colors.black26,
-                      spreadRadius: -1,
-                      blurRadius: 10,
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: RaisedButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/sun.png',
-                          width: displayWidth(context) * 0.07,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Light',
-                          style: TextStyle(
-                            fontFamily: 'OpenSans',
-                            fontWeight: FontWeight.w600,
-                            color: bgColor,
-                            fontSize: displayWidth(context) * 0.06,
-                          ),
-                        ),
-                      ],
-                    ),
-                    elevation: 100.0,
-                    color: mainColor,
-                    onPressed: () {
-                      print('hello');
-                    },
-                  ),
-                ),
-              ),
-              AnimatedContainer(
-                duration: Duration(milliseconds: 200),
-                width: displayWidth(context) * 0.35,
-                height: displayWidth(context) * 0.2,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 5),
-                      color: Colors.black26,
-                      spreadRadius: -1,
-                      blurRadius: 10,
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: RaisedButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/moon.png',
-                          width: displayWidth(context) * 0.07,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Dark',
-                          style: TextStyle(
-                            fontFamily: 'OpenSans',
-                            fontWeight: FontWeight.w600,
-                            color: bgColor,
-                            fontSize: displayWidth(context) * 0.06,
-                          ),
-                        ),
-                      ],
-                    ),
-                    elevation: 100.0,
-                    color: mainColor,
-                    onPressed: () {
-                      print('hello');
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
         Padding(
           padding: const EdgeInsets.only(
             left: 10.0,
@@ -199,7 +84,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: mainColor,
                     onPressed: () {
                       showDialog(
-                        barrierColor: Colors.black54,
+                        barrierColor: Colors.black38,
                         useSafeArea: true,
                         context: context,
                         builder: (context) => Center(
@@ -233,7 +118,7 @@ class _ResetActivityDialogState extends State<ResetActivityDialog> {
         width: displayWidth(context) * 0.65,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: bgColor,
+          color: Theme.of(context).primaryColor,
         ),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -289,6 +174,7 @@ class _ResetActivityDialogState extends State<ResetActivityDialog> {
                             ),
                             onPressed: () {
                               setState(() {
+                                Hive.box('activity').clear();
                                 activityList.clear();
                                 totalPoints();
                                 Navigator.pop(context);

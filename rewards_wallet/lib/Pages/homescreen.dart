@@ -18,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     selectedScreen = 0;
+    totalPoints();
+    fillList();
     super.initState();
   }
 
@@ -25,18 +27,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        systemNavigationBarColor: bgColor,
+        systemNavigationBarColor: darkColorOne,
         statusBarColor: mainColor,
         statusBarIconBrightness: Brightness.light,
       ),
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: Theme.of(context).primaryColor,
           resizeToAvoidBottomInset: false,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: (selectedScreen == 0) ? Fab() : null,
-          backgroundColor: bgColor,
           bottomNavigationBar: BottomAppBar(
+            color: Theme.of(context).bottomAppBarColor,
             shape: CircularNotchedRectangle(),
             child: AnimatedContainer(
               duration: Duration(
@@ -67,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 size: displayWidth(context) * 0.07,
                                 color: (selectedScreen == 0)
                                     ? mainColor
-                                    : Colors.black,
+                                    : Theme.of(context).textSelectionColor,
                               ),
                               Text(
                                 'Home',
@@ -76,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontWeight: FontWeight.w400,
                                   color: (selectedScreen == 0)
                                       ? mainColor
-                                      : Colors.black,
+                                      : Theme.of(context).textSelectionColor,
                                 ),
                               ),
                             ],
@@ -96,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 size: displayWidth(context) * 0.07,
                                 color: (selectedScreen == 1)
                                     ? mainColor
-                                    : Colors.black,
+                                    : Theme.of(context).textSelectionColor,
                               ),
                               Text(
                                 'Settings',
@@ -105,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontWeight: FontWeight.w400,
                                   color: (selectedScreen == 1)
                                       ? mainColor
-                                      : Colors.black,
+                                      : Theme.of(context).textSelectionColor,
                                 ),
                               ),
                             ],
@@ -208,7 +211,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
         width: displayWidth(context) * 0.85,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: bgColor,
+          color: Theme.of(context).primaryColor,
         ),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -239,7 +242,9 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                             width: displayWidth(context) * 0.3,
                             height: displayWidth(context) * 0.1,
                             decoration: BoxDecoration(
-                              color: (selected == 1) ? redColor : bgColor,
+                              color: (selected == 1)
+                                  ? redColor
+                                  : Theme.of(context).buttonColor,
                               borderRadius: BorderRadius.circular(5),
                               boxShadow: [
                                 BoxShadow(
@@ -278,7 +283,9 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                             width: displayWidth(context) * 0.3,
                             height: displayWidth(context) * 0.1,
                             decoration: BoxDecoration(
-                              color: (selected == 2) ? tealColor : bgColor,
+                              color: (selected == 2)
+                                  ? tealColor
+                                  : Theme.of(context).buttonColor,
                               borderRadius: BorderRadius.circular(5),
                               boxShadow: [
                                 BoxShadow(
@@ -524,8 +531,8 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                                   eventType,
                                   spanTime);
                               addActivity(activity);
-
                               setState(() {
+                                fillList();
                                 totalPoints();
                                 navigator.pop(context);
                               });

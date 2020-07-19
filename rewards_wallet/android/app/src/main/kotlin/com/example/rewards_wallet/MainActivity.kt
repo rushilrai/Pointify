@@ -1,4 +1,4 @@
-package com.example.rewards_wallet
+package com.rr.pointify
 
 import io.flutter.embedding.android.FlutterActivity
 
