@@ -28,15 +28,16 @@ void addActivity(Activity activity) {
   Hive.box('activity').add(activity);
 }
 
-void fillList() {
+void fillList() async {
   activityList = [];
   print(Hive.box('activity').length);
   for (var i = Hive.box('activity').length; i > 0; i--) {
     Activity activity = Activity(
-        Hive.box('activity').get(i - 1).title,
-        Hive.box('activity').get(i - 1).points,
-        Hive.box('activity').get(i - 1).type,
-        Hive.box('activity').get(i - 1).duration);
+      Hive.box('activity').get(i - 1).title,
+      Hive.box('activity').get(i - 1).points,
+      Hive.box('activity').get(i - 1).type,
+      Hive.box('activity').get(i - 1).duration,
+    );
     activityList.add(activity);
   }
 }

@@ -117,7 +117,7 @@ class _ResetActivityDialogState extends State<ResetActivityDialog> {
         height: displayWidth(context) * 0.3,
         width: displayWidth(context) * 0.65,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
           color: Theme.of(context).primaryColor,
         ),
         child: Padding(

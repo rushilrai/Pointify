@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:rewards_wallet/Pages/homescreen.dart';
 import 'package:rewards_wallet/Pages/settings.dart';
@@ -208,97 +209,118 @@ class _HomePageState extends State<HomePage> {
                                                                               7.0,
                                                                         ),
                                                                         child:
-                                                                            Row(
-                                                                          children: [
-                                                                            AnimatedContainer(
-                                                                              duration: Duration(
-                                                                                milliseconds: 200,
-                                                                              ),
-                                                                              height: displayWidth(context) * 0.13,
-                                                                              width: displayWidth(context) * 0.7,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: BorderRadius.circular(5),
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    color: Colors.black12,
-                                                                                    offset: Offset(0, 3),
-                                                                                    spreadRadius: 0,
-                                                                                    blurRadius: 5,
-                                                                                  ),
-                                                                                ],
-                                                                                color: Theme.of(context).buttonColor,
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.only(
-                                                                                  left: 10.0,
-                                                                                  right: 10.0,
+                                                                            GestureDetector(
+                                                                          onTap:
+                                                                              () async {
+                                                                            await showDialog(
+                                                                              barrierColor: Colors.black54,
+                                                                              useSafeArea: true,
+                                                                              context: context,
+                                                                              builder: (context) => Center(
+                                                                                child: RedoActivityDialog(
+                                                                                  activityList[index].title,
+                                                                                  activityList[index].type,
+                                                                                  activityList[index].points,
+                                                                                  activityList[index].duration,
                                                                                 ),
-                                                                                child: Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                  children: [
-                                                                                    Column(
-                                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                                      children: [
-                                                                                        Text(
-                                                                                          activityList[index].title,
-                                                                                          style: TextStyle(
-                                                                                            fontFamily: 'OpenSans',
-                                                                                            color: redColor,
-                                                                                            fontWeight: FontWeight.w400,
-                                                                                            fontSize: displayWidth(context) * 0.045,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                    Column(
-                                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                                      children: [
-                                                                                        Row(
-                                                                                          children: [
-                                                                                            Text(
-                                                                                              activityList[index].points.toString(),
-                                                                                              style: TextStyle(
-                                                                                                fontFamily: 'OpenSans',
-                                                                                                color: redColor,
-                                                                                                fontWeight: FontWeight.w400,
-                                                                                                fontSize: displayWidth(context) * 0.045,
-                                                                                              ),
-                                                                                            ),
-                                                                                            Text(
-                                                                                              ' P',
-                                                                                              style: TextStyle(
-                                                                                                fontFamily: 'OpenSans',
-                                                                                                color: redColor,
-                                                                                                fontWeight: FontWeight.w400,
-                                                                                                fontSize: displayWidth(context) * 0.045,
-                                                                                              ),
-                                                                                            ),
-                                                                                          ],
-                                                                                        ),
-                                                                                      ],
+                                                                              ),
+                                                                            );
+                                                                            await Navigator.pop(context);
+                                                                            setState(() {});
+                                                                          },
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              AnimatedContainer(
+                                                                                duration: Duration(
+                                                                                  milliseconds: 200,
+                                                                                ),
+                                                                                height: displayWidth(context) * 0.13,
+                                                                                width: displayWidth(context) * 0.7,
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(5),
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color: Colors.black12,
+                                                                                      offset: Offset(0, 3),
+                                                                                      spreadRadius: 0,
+                                                                                      blurRadius: 5,
                                                                                     ),
                                                                                   ],
+                                                                                  color: Theme.of(context).buttonColor,
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.only(
+                                                                                    left: 10.0,
+                                                                                    right: 10.0,
+                                                                                  ),
+                                                                                  child: Row(
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    children: [
+                                                                                      Column(
+                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            activityList[index].title,
+                                                                                            style: TextStyle(
+                                                                                              fontFamily: 'OpenSans',
+                                                                                              color: redColor,
+                                                                                              fontWeight: FontWeight.w400,
+                                                                                              fontSize: displayWidth(context) * 0.045,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                      Column(
+                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Row(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                activityList[index].points.toString(),
+                                                                                                style: TextStyle(
+                                                                                                  fontFamily: 'OpenSans',
+                                                                                                  color: redColor,
+                                                                                                  fontWeight: FontWeight.w400,
+                                                                                                  fontSize: displayWidth(context) * 0.045,
+                                                                                                ),
+                                                                                              ),
+                                                                                              Text(
+                                                                                                ' P',
+                                                                                                style: TextStyle(
+                                                                                                  fontFamily: 'OpenSans',
+                                                                                                  color: redColor,
+                                                                                                  fontWeight: FontWeight.w400,
+                                                                                                  fontSize: displayWidth(context) * 0.045,
+                                                                                                ),
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
                                                                                 ),
                                                                               ),
-                                                                            ),
-                                                                            Spacer(),
-                                                                            Icon(
-                                                                              Icons.alarm,
-                                                                              color: Theme.of(context).textSelectionColor,
-                                                                            ),
-                                                                            SizedBox(
-                                                                              width: 05,
-                                                                            ),
-                                                                            Text(
-                                                                              activityList[index].duration.toString() + 'Hr',
-                                                                              style: TextStyle(
-                                                                                fontFamily: 'OpenSans',
+                                                                              Spacer(),
+                                                                              Icon(
+                                                                                Icons.alarm,
                                                                                 color: Theme.of(context).textSelectionColor,
-                                                                                fontWeight: FontWeight.w400,
-                                                                                fontSize: displayWidth(context) * 0.045,
                                                                               ),
-                                                                            ),
-                                                                          ],
+                                                                              SizedBox(
+                                                                                width: 05,
+                                                                              ),
+                                                                              Text(
+                                                                                activityList[index].duration.toString() + 'Hr',
+                                                                                style: TextStyle(
+                                                                                  fontFamily: 'OpenSans',
+                                                                                  color: Theme.of(context).textSelectionColor,
+                                                                                  fontWeight: FontWeight.w400,
+                                                                                  fontSize: displayWidth(context) * 0.045,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
                                                                         ),
                                                                       )
                                                                     : SizedBox(
@@ -507,97 +529,118 @@ class _HomePageState extends State<HomePage> {
                                                                               7.0,
                                                                         ),
                                                                         child:
-                                                                            Row(
-                                                                          children: [
-                                                                            AnimatedContainer(
-                                                                              duration: Duration(
-                                                                                milliseconds: 200,
-                                                                              ),
-                                                                              height: displayWidth(context) * 0.13,
-                                                                              width: displayWidth(context) * 0.7,
-                                                                              decoration: BoxDecoration(
-                                                                                borderRadius: BorderRadius.circular(5),
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    color: Colors.black12,
-                                                                                    offset: Offset(0, 3),
-                                                                                    spreadRadius: 0,
-                                                                                    blurRadius: 5,
-                                                                                  ),
-                                                                                ],
-                                                                                color: Theme.of(context).buttonColor,
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.only(
-                                                                                  left: 10.0,
-                                                                                  right: 10.0,
+                                                                            GestureDetector(
+                                                                          onTap:
+                                                                              () async {
+                                                                            await showDialog(
+                                                                              barrierColor: Colors.black54,
+                                                                              useSafeArea: true,
+                                                                              context: context,
+                                                                              builder: (context) => Center(
+                                                                                child: RedoActivityDialog(
+                                                                                  activityList[index].title,
+                                                                                  activityList[index].type,
+                                                                                  activityList[index].points,
+                                                                                  activityList[index].duration,
                                                                                 ),
-                                                                                child: Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                  children: [
-                                                                                    Column(
-                                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                                      children: [
-                                                                                        Text(
-                                                                                          activityList[index].title,
-                                                                                          style: TextStyle(
-                                                                                            fontFamily: 'OpenSans',
-                                                                                            color: tealColor,
-                                                                                            fontWeight: FontWeight.w400,
-                                                                                            fontSize: displayWidth(context) * 0.045,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                    Column(
-                                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                                      children: [
-                                                                                        Row(
-                                                                                          children: [
-                                                                                            Text(
-                                                                                              activityList[index].points.toString(),
-                                                                                              style: TextStyle(
-                                                                                                fontFamily: 'OpenSans',
-                                                                                                color: tealColor,
-                                                                                                fontWeight: FontWeight.w400,
-                                                                                                fontSize: displayWidth(context) * 0.045,
-                                                                                              ),
-                                                                                            ),
-                                                                                            Text(
-                                                                                              ' P',
-                                                                                              style: TextStyle(
-                                                                                                fontFamily: 'OpenSans',
-                                                                                                color: tealColor,
-                                                                                                fontWeight: FontWeight.w400,
-                                                                                                fontSize: displayWidth(context) * 0.045,
-                                                                                              ),
-                                                                                            ),
-                                                                                          ],
-                                                                                        ),
-                                                                                      ],
+                                                                              ),
+                                                                            );
+                                                                            await Navigator.pop(context);
+                                                                            setState(() {});
+                                                                          },
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              AnimatedContainer(
+                                                                                duration: Duration(
+                                                                                  milliseconds: 200,
+                                                                                ),
+                                                                                height: displayWidth(context) * 0.13,
+                                                                                width: displayWidth(context) * 0.7,
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(5),
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color: Colors.black12,
+                                                                                      offset: Offset(0, 3),
+                                                                                      spreadRadius: 0,
+                                                                                      blurRadius: 5,
                                                                                     ),
                                                                                   ],
+                                                                                  color: Theme.of(context).buttonColor,
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.only(
+                                                                                    left: 10.0,
+                                                                                    right: 10.0,
+                                                                                  ),
+                                                                                  child: Row(
+                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                    children: [
+                                                                                      Column(
+                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            activityList[index].title,
+                                                                                            style: TextStyle(
+                                                                                              fontFamily: 'OpenSans',
+                                                                                              color: tealColor,
+                                                                                              fontWeight: FontWeight.w400,
+                                                                                              fontSize: displayWidth(context) * 0.045,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                      Column(
+                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Row(
+                                                                                            children: [
+                                                                                              Text(
+                                                                                                activityList[index].points.toString(),
+                                                                                                style: TextStyle(
+                                                                                                  fontFamily: 'OpenSans',
+                                                                                                  color: tealColor,
+                                                                                                  fontWeight: FontWeight.w400,
+                                                                                                  fontSize: displayWidth(context) * 0.045,
+                                                                                                ),
+                                                                                              ),
+                                                                                              Text(
+                                                                                                ' P',
+                                                                                                style: TextStyle(
+                                                                                                  fontFamily: 'OpenSans',
+                                                                                                  color: tealColor,
+                                                                                                  fontWeight: FontWeight.w400,
+                                                                                                  fontSize: displayWidth(context) * 0.045,
+                                                                                                ),
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
                                                                                 ),
                                                                               ),
-                                                                            ),
-                                                                            Spacer(),
-                                                                            Icon(
-                                                                              Icons.alarm,
-                                                                              color: Theme.of(context).textSelectionColor,
-                                                                            ),
-                                                                            SizedBox(
-                                                                              width: 05,
-                                                                            ),
-                                                                            Text(
-                                                                              activityList[index].duration.toString() + 'Hr',
-                                                                              style: TextStyle(
-                                                                                fontFamily: 'OpenSans',
+                                                                              Spacer(),
+                                                                              Icon(
+                                                                                Icons.alarm,
                                                                                 color: Theme.of(context).textSelectionColor,
-                                                                                fontWeight: FontWeight.w400,
-                                                                                fontSize: displayWidth(context) * 0.045,
                                                                               ),
-                                                                            ),
-                                                                          ],
+                                                                              SizedBox(
+                                                                                width: 05,
+                                                                              ),
+                                                                              Text(
+                                                                                activityList[index].duration.toString() + 'Hr',
+                                                                                style: TextStyle(
+                                                                                  fontFamily: 'OpenSans',
+                                                                                  color: Theme.of(context).textSelectionColor,
+                                                                                  fontWeight: FontWeight.w400,
+                                                                                  fontSize: displayWidth(context) * 0.045,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
                                                                         ),
                                                                       )
                                                                     : SizedBox(
@@ -1017,5 +1060,158 @@ class PointsPainterDark extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
+  }
+}
+
+class RedoActivityDialog extends StatefulWidget {
+  String eventName;
+  String eventType;
+  int pointsCount;
+  double eventDuration;
+  RedoActivityDialog(
+    this.eventName,
+    this.eventType,
+    this.pointsCount,
+    this.eventDuration,
+  );
+  @override
+  _RedoActivityDialogState createState() => _RedoActivityDialogState(
+        eventName,
+        eventType,
+        pointsCount,
+        eventDuration,
+      );
+}
+
+class _RedoActivityDialogState extends State<RedoActivityDialog> {
+  String eventName;
+  String eventType;
+  int pointsCount;
+  double eventDuration;
+  _RedoActivityDialogState(
+    this.eventName,
+    this.eventType,
+    this.pointsCount,
+    this.eventDuration,
+  );
+  @override
+  Widget build(BuildContext context) {
+    return _SystemPadding(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 200),
+        height: displayWidth(context) * 0.3,
+        width: displayWidth(context) * 0.65,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Theme.of(context).primaryColor,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10.0,
+                  right: 10.0,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Material(
+                          type: MaterialType.transparency,
+                          child: Text(
+                            'This Activity will be added again',
+                            style: TextStyle(
+                              fontFamily: 'OpenSans',
+                              fontWeight: FontWeight.w400,
+                              color: mainColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Material(
+                          type: MaterialType.transparency,
+                          child: Text(
+                            'Press Yes to proceed.',
+                            style: TextStyle(
+                              fontFamily: 'OpenSans',
+                              fontWeight: FontWeight.w600,
+                              color: mainColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: displayWidth(context) * 0.15,
+                          height: displayWidth(context) * 0.07,
+                          child: FlatButton(
+                            color: mainColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            onPressed: () {
+                              Activity activity = Activity(
+                                eventName,
+                                pointsCount,
+                                eventType,
+                                eventDuration,
+                              );
+                              addActivity(activity);
+                              setState(() {
+                                fillList();
+                                totalPoints();
+                                navigator.pop(context);
+                              });
+                            },
+                            child: Center(
+                              child: Text(
+                                'Yes',
+                                style: TextStyle(
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.w600,
+                                  color: bgColor,
+                                  fontSize: displayWidth(context) * 0.04,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SystemPadding extends StatelessWidget {
+  final Widget child;
+
+  _SystemPadding({Key key, this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    return new AnimatedContainer(
+        padding: mediaQuery.viewInsets,
+        duration: const Duration(milliseconds: 150),
+        child: child);
   }
 }

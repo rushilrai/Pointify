@@ -18,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     selectedScreen = 0;
-    totalPoints();
     fillList();
+    totalPoints();
     super.initState();
   }
 
@@ -210,7 +210,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
         height: displayWidth(context) * 0.8,
         width: displayWidth(context) * 0.85,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
           color: Theme.of(context).primaryColor,
         ),
         child: Padding(
@@ -524,12 +524,13 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                               );
                             } else {
                               Activity activity = Activity(
-                                  eventName,
-                                  (eventType == 'Work')
-                                      ? pointsCount
-                                      : -pointsCount,
-                                  eventType,
-                                  spanTime);
+                                eventName,
+                                (eventType == 'Work')
+                                    ? pointsCount
+                                    : -pointsCount,
+                                eventType,
+                                spanTime,
+                              );
                               addActivity(activity);
                               setState(() {
                                 fillList();
