@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        systemNavigationBarColor: darkColorOne,
+        systemNavigationBarColor: Theme.of(context).canvasColor,
         statusBarColor: mainColor,
         statusBarIconBrightness: Brightness.light,
       ),

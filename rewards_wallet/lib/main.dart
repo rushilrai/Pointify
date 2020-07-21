@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         bottomAppBarColor: bgColor,
         buttonColor: bgColor,
         textSelectionColor: Colors.black,
+        canvasColor: bgColor,
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
         bottomAppBarColor: darkColorTwo,
         buttonColor: darkColorThree,
         textSelectionColor: Colors.white,
+        canvasColor: darkColorFour,
       ),
       home: FutureBuilder(
         future: Hive.openBox('activity'),

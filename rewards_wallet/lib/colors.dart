@@ -8,3 +8,4 @@ final tealColor = Color.fromRGBO(9, 156, 136, 1);
 final darkColorOne = Color.fromRGBO(18, 18, 18, 1);
 final darkColorTwo = Color.fromRGBO(255, 255, 255, 0.03);
 final darkColorThree = Color.fromRGBO(255, 255, 255, 0.07);
+final darkColorFour = Color.fromRGBO(20, 20, 20, 1);
