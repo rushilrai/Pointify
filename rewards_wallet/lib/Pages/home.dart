@@ -79,13 +79,20 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                points.toString() + ' P',
+                                points.toString(),
                                 style: TextStyle(
                                   fontFamily: 'OpenSans',
                                   fontWeight: FontWeight.w600,
                                   fontSize: displayWidth(context) * 0.1,
                                   color: bgColor,
                                 ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Image.asset(
+                                'assets/images/point.png',
+                                width: displayWidth(context) * 0.08,
                               ),
                             ],
                           ),
@@ -284,14 +291,12 @@ class _HomePageState extends State<HomePage> {
                                                                                                   fontSize: displayWidth(context) * 0.045,
                                                                                                 ),
                                                                                               ),
-                                                                                              Text(
-                                                                                                ' P',
-                                                                                                style: TextStyle(
-                                                                                                  fontFamily: 'OpenSans',
-                                                                                                  color: redColor,
-                                                                                                  fontWeight: FontWeight.w400,
-                                                                                                  fontSize: displayWidth(context) * 0.045,
-                                                                                                ),
+                                                                                              SizedBox(
+                                                                                                width: 5,
+                                                                                              ),
+                                                                                              Image.asset(
+                                                                                                'assets/images/point.png',
+                                                                                                width: displayWidth(context) * 0.045,
                                                                                               ),
                                                                                             ],
                                                                                           ),
@@ -604,14 +609,12 @@ class _HomePageState extends State<HomePage> {
                                                                                                   fontSize: displayWidth(context) * 0.045,
                                                                                                 ),
                                                                                               ),
-                                                                                              Text(
-                                                                                                ' P',
-                                                                                                style: TextStyle(
-                                                                                                  fontFamily: 'OpenSans',
-                                                                                                  color: tealColor,
-                                                                                                  fontWeight: FontWeight.w400,
-                                                                                                  fontSize: displayWidth(context) * 0.045,
-                                                                                                ),
+                                                                                              SizedBox(
+                                                                                                width: 5,
+                                                                                              ),
+                                                                                              Image.asset(
+                                                                                                'assets/images/point.png',
+                                                                                                width: displayWidth(context) * 0.045,
                                                                                               ),
                                                                                             ],
                                                                                           ),
@@ -861,22 +864,14 @@ class _HomePageState extends State<HomePage> {
                                                             0.045,
                                                       ),
                                                     ),
-                                                    Text(
-                                                      ' P',
-                                                      style: TextStyle(
-                                                        fontFamily: 'OpenSans',
-                                                        color:
-                                                            (activityList[index]
-                                                                        .type ==
-                                                                    'Work')
-                                                                ? redColor
-                                                                : tealColor,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: displayWidth(
-                                                                context) *
-                                                            0.045,
-                                                      ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Image.asset(
+                                                      'assets/images/point.png',
+                                                      width: displayWidth(
+                                                              context) *
+                                                          0.045,
                                                     ),
                                                   ],
                                                 ),

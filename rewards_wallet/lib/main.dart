@@ -12,6 +12,7 @@ void main() async {
   final documentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(documentDirectory.path);
   Hive.registerAdapter(ActivityAdapter());
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MyApp());
 }
 
