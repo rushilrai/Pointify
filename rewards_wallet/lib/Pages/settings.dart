@@ -3,6 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:rewards_wallet/activity.dart';
 import 'package:rewards_wallet/colors.dart';
 import 'package:rewards_wallet/sizes.dart';
+import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'homescreen.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -14,6 +16,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     selectedScreen = 1;
+
     super.initState();
   }
 
@@ -92,6 +95,179 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       );
                     },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            top: 10.0,
+          ),
+          child: Text(
+            'Support',
+            style: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.w600,
+              color: bgColor,
+              fontSize: displayWidth(context) * 0.06,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                width: displayWidth(context) * 0.36,
+                height: displayWidth(context) * 0.2,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 5),
+                      color: Colors.black26,
+                      spreadRadius: -1,
+                      blurRadius: 10,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: RaisedButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.share,
+                          size: displayWidth(context) * 0.06,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Share',
+                          style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.w600,
+                            color: bgColor,
+                            fontSize: displayWidth(context) * 0.06,
+                          ),
+                        ),
+                      ],
+                    ),
+                    elevation: 100.0,
+                    color: mainColor,
+                    onPressed: () {
+                      Share.share(
+                          "Check out Pointify, https://play.google.com/store/apps/details?id=com.rr.pointify");
+                    },
+                  ),
+                ),
+              ),
+              AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                width: displayWidth(context) * 0.36,
+                height: displayWidth(context) * 0.2,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 5),
+                      color: Colors.black26,
+                      spreadRadius: -1,
+                      blurRadius: 10,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: RaisedButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.star_border,
+                          size: displayWidth(context) * 0.06,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Rate',
+                          style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.w600,
+                            color: bgColor,
+                            fontSize: displayWidth(context) * 0.06,
+                          ),
+                        ),
+                      ],
+                    ),
+                    elevation: 100.0,
+                    color: mainColor,
+                    onPressed: () async {
+                      await launch(
+                          'https://play.google.com/store/apps/details?id=com.rr.pointify');
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                width: displayWidth(context) * 0.75,
+                height: displayWidth(context) * 0.2,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 5),
+                      color: Colors.black26,
+                      spreadRadius: -1,
+                      blurRadius: 10,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: RaisedButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.monetization_on,
+                          size: displayWidth(context) * 0.06,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Basic Support',
+                          style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.w600,
+                            color: bgColor,
+                            fontSize: displayWidth(context) * 0.06,
+                          ),
+                        ),
+                      ],
+                    ),
+                    elevation: 100.0,
+                    color: mainColor,
+                    onPressed: () {},
                   ),
                 ),
               ),
