@@ -487,7 +487,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                             ),
                           ),
                           onPressed: () {
-                            if (event.text.length == 0) {
+                            if (event.text.length == 1) {
                               Get.snackbar(
                                 'Error',
                                 'Add Event Name',
@@ -496,7 +496,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                                 borderRadius: 5,
                               );
                             }
-                            if (span.text.length == 0) {
+                            if (span.text.length == 1) {
                               Get.snackbar(
                                 'Error',
                                 'Add Duration of Activity',
@@ -505,7 +505,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                                 borderRadius: 5,
                               );
                             }
-                            if (points.text.length == 0) {
+                            if (points.text.length == 1) {
                               Get.snackbar(
                                 'Error',
                                 'Add Points',
@@ -522,7 +522,11 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                                 barBlur: 0,
                                 borderRadius: 5,
                               );
-                            } else {
+                            }
+                            if (event.text.length != 0 &&
+                                span.text.length != 0 &&
+                                points.text.length != 0 &&
+                                (selected == 1 || selected == 2)) {
                               Activity activity = Activity(
                                 eventName,
                                 (eventType == 'Work')
@@ -532,6 +536,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                                 spanTime,
                               );
                               addActivity(activity);
+                              navigator.pop(context);
                               setState(() {
                                 fillList();
                                 totalPoints();

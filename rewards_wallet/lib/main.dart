@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rewards_wallet/Pages/homescreen.dart';
+import 'package:rewards_wallet/Pages/onBoarding.dart';
 import 'package:rewards_wallet/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'activity.dart';
 
 void main() async {
@@ -13,7 +15,16 @@ void main() async {
   Hive.init(documentDirectory.path);
   Hive.registerAdapter(ActivityAdapter());
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  firstTimeCheck();
   runApp(MyApp());
+}
+
+bool firstTime;
+
+firstTimeCheck() async {
+  SharedPreferences appPref = await SharedPreferences.getInstance();
+  firstTime = appPref.getBool('first_time');
+  print(firstTime);
 }
 
 class MyApp extends StatelessWidget {
@@ -49,7 +60,11 @@ class MyApp extends StatelessWidget {
                 snapshot.error.toString(),
               );
             } else {
-              return HomeScreen();
+              if (firstTime != null && !firstTime) {
+                return HomeScreen();
+              } else {
+                return OnBoarding();
+              }
             }
           } else {
             return Scaffold();
