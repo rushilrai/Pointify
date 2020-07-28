@@ -221,7 +221,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
         ),
-        Padding(
+        /*Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -273,7 +273,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ],
           ),
-        ),
+        ),*/
       ],
     );
   }

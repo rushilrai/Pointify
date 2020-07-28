@@ -487,42 +487,6 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                             ),
                           ),
                           onPressed: () {
-                            if (event.text.length == 1) {
-                              Get.snackbar(
-                                'Error',
-                                'Add Event Name',
-                                backgroundColor: bgColor,
-                                barBlur: 0,
-                                borderRadius: 5,
-                              );
-                            }
-                            if (span.text.length == 1) {
-                              Get.snackbar(
-                                'Error',
-                                'Add Duration of Activity',
-                                backgroundColor: bgColor,
-                                barBlur: 0,
-                                borderRadius: 5,
-                              );
-                            }
-                            if (points.text.length == 1) {
-                              Get.snackbar(
-                                'Error',
-                                'Add Points',
-                                backgroundColor: bgColor,
-                                barBlur: 0,
-                                borderRadius: 5,
-                              );
-                            }
-                            if (!(selected == 1 || selected == 2)) {
-                              Get.snackbar(
-                                'Error',
-                                'Select a Type',
-                                backgroundColor: bgColor,
-                                barBlur: 0,
-                                borderRadius: 5,
-                              );
-                            }
                             if (event.text.length != 0 &&
                                 span.text.length != 0 &&
                                 points.text.length != 0 &&
@@ -536,12 +500,37 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                                 spanTime,
                               );
                               addActivity(activity);
-                              navigator.pop(context);
+                              //navigator.pop(context);
                               setState(() {
                                 fillList();
                                 totalPoints();
                                 navigator.pop(context);
                               });
+                            } else {
+                              Get.snackbar(
+                                'Error',
+                                'Fill All Details',
+                                borderRadius: 10,
+                                backgroundColor: Theme.of(context).primaryColor,
+                                margin: EdgeInsets.all(10),
+                                titleText: Text(
+                                  'Error',
+                                  style: TextStyle(
+                                    color: Theme.of(context).accentColor,
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: displayWidth(context) * 0.05,
+                                  ),
+                                ),
+                                messageText: Text(
+                                  'Fill All Details',
+                                  style: TextStyle(
+                                    color: Theme.of(context).textSelectionColor,
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              );
                             }
                           },
                           color: mainColor,
