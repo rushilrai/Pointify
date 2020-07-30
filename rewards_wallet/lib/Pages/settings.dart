@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:hive/hive.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'package:rewards_wallet/activity.dart';
 import 'package:rewards_wallet/colors.dart';
-import 'package:rewards_wallet/main.dart';
+
 import 'package:rewards_wallet/sizes.dart';
 import 'package:share/share.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'homescreen.dart';
 
@@ -226,7 +225,8 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
         ),
-        Padding(
+
+        /*  Padding(
           padding: const EdgeInsets.only(
             left: 10.0,
             right: 10.0,
@@ -486,7 +486,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ],
           ),
-        ),
+        ),*/
         /*Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
