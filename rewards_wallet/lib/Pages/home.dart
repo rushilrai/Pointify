@@ -151,8 +151,11 @@ class _HomePageState extends State<HomePage> {
                                     showMaterialModalBottomSheet(
                                       enableDrag: false,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
+                                      ),
                                       context: context,
                                       builder: (context, scrollController) =>
                                           ClipRRect(
@@ -465,7 +468,10 @@ class _HomePageState extends State<HomePage> {
                                     showMaterialModalBottomSheet(
                                       enableDrag: false,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
                                       ),
                                       context: context,
                                       builder: (context, scrollController) =>

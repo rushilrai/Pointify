@@ -83,6 +83,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/sun.png
     - assets/images/moon.png
+    - assets/images/system.png
     - assets/images/reset.png
     - assets/images/star.png
     - assets/onboarding/

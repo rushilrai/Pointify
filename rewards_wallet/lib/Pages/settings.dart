@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:hive/hive.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:rewards_wallet/activity.dart';
 import 'package:rewards_wallet/colors.dart';
+import 'package:rewards_wallet/main.dart';
 import 'package:rewards_wallet/sizes.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'homescreen.dart';
 
@@ -214,6 +219,267 @@ class _SettingsPageState extends State<SettingsPage> {
                     onPressed: () async {
                       await launch(
                           'https://play.google.com/store/apps/details?id=com.rr.pointify');
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            top: 10.0,
+          ),
+          child: Text(
+            'Theme',
+            style: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.w600,
+              color: bgColor,
+              fontSize: displayWidth(context) * 0.06,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                width: displayWidth(context) * 0.75,
+                height: displayWidth(context) * 0.2,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 5),
+                      color: Colors.black26,
+                      spreadRadius: -1,
+                      blurRadius: 10,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: RaisedButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          (systemTheme == true)
+                              ? 'assets/images/system.png'
+                              : (userTheme == 'Light')
+                                  ? 'assets/images/sun.png'
+                                  : 'assets/images/moon.png',
+                          width: displayWidth(context) * 0.06,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          (systemTheme == true)
+                              ? 'System'
+                              : (userTheme == 'Light') ? 'Light' : 'Dark',
+                          style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.w600,
+                            color: bgColor,
+                            fontSize: displayWidth(context) * 0.06,
+                          ),
+                        ),
+                      ],
+                    ),
+                    elevation: 100.0,
+                    color: mainColor,
+                    onPressed: () {
+                      showMaterialModalBottomSheet(
+                        enableDrag: false,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                        ),
+                        context: context,
+                        builder: (context, scrollController) => ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            color: Theme.of(context).primaryColor,
+                            width: displayWidth(context),
+                            height: displayWidth(context) * 0.3,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      AnimatedContainer(
+                                        duration: Duration(milliseconds: 200),
+                                        width: displayWidth(context) * 0.25,
+                                        height: displayWidth(context) * 0.2,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: Offset(0, 5),
+                                              color: Colors.black26,
+                                              spreadRadius: -1,
+                                              blurRadius: 10,
+                                            ),
+                                          ],
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: RaisedButton(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/system.png',
+                                                  width: displayWidth(context) *
+                                                      0.07,
+                                                ),
+                                              ],
+                                            ),
+                                            elevation: 100.0,
+                                            color: mainColor,
+                                            onPressed: () async {
+                                              SharedPreferences appPref =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              appPref.setBool(
+                                                  'systemTheme', true);
+                                              Get.changeThemeMode(
+                                                  ThemeMode.system);
+                                              systemTheme = true;
+                                              setState(() {});
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      AnimatedContainer(
+                                        duration: Duration(milliseconds: 200),
+                                        width: displayWidth(context) * 0.25,
+                                        height: displayWidth(context) * 0.2,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: Offset(0, 5),
+                                              color: Colors.black26,
+                                              spreadRadius: -1,
+                                              blurRadius: 10,
+                                            ),
+                                          ],
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: RaisedButton(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/moon.png',
+                                                  width: displayWidth(context) *
+                                                      0.07,
+                                                ),
+                                              ],
+                                            ),
+                                            elevation: 100.0,
+                                            color: mainColor,
+                                            onPressed: () async {
+                                              SharedPreferences appPref =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              appPref.setBool(
+                                                  'systemTheme', false);
+                                              appPref.setString(
+                                                  'userTheme', 'Dark');
+                                              Get.changeThemeMode(
+                                                  ThemeMode.dark);
+                                              systemTheme = false;
+                                              userTheme = 'Dark';
+                                              setState(() {});
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      AnimatedContainer(
+                                        duration: Duration(milliseconds: 200),
+                                        width: displayWidth(context) * 0.25,
+                                        height: displayWidth(context) * 0.2,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: Offset(0, 5),
+                                              color: Colors.black26,
+                                              spreadRadius: -1,
+                                              blurRadius: 10,
+                                            ),
+                                          ],
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: RaisedButton(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/sun.png',
+                                                  width: displayWidth(context) *
+                                                      0.07,
+                                                ),
+                                              ],
+                                            ),
+                                            elevation: 100.0,
+                                            color: mainColor,
+                                            onPressed: () async {
+                                              SharedPreferences appPref =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              appPref.setBool(
+                                                  'systemTheme', false);
+                                              appPref.setString(
+                                                  'userTheme', 'Light');
+                                              Get.changeThemeMode(
+                                                  ThemeMode.light);
+                                              systemTheme = false;
+                                              userTheme = 'Light';
+                                              setState(() {});
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),

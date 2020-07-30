@@ -16,21 +16,43 @@ void main() async {
   Hive.registerAdapter(ActivityAdapter());
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   firstTimeCheck();
+  themeCheck();
   runApp(MyApp());
 }
 
 bool firstTime;
+bool systemTheme;
+String userTheme;
 
 firstTimeCheck() async {
   SharedPreferences appPref = await SharedPreferences.getInstance();
   firstTime = appPref.getBool('first_time');
-  print(firstTime);
+  //print(firstTime);
+}
+
+themeCheck() async {
+  SharedPreferences appPref = await SharedPreferences.getInstance();
+  if (appPref.getBool('systemTheme') == null) {
+    systemTheme = true;
+  } else {
+    systemTheme = appPref.getBool('systemTheme');
+  }
+  if (appPref.getString('userTheme') == null) {
+    userTheme = 'Light';
+  } else {
+    userTheme = appPref.getString('userTheme');
+  }
+  print(userTheme);
+  print(systemTheme);
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      themeMode: (systemTheme == true)
+          ? ThemeMode.system
+          : (userTheme == 'Light') ? ThemeMode.light : ThemeMode.dark,
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: bgColor,

@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:path/path.dart';
 
 part 'activity.g.dart';
 
